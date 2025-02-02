@@ -1,0 +1,19 @@
+{
+  "name": "to-do-backend",
+  "version": "1.0.0",
+  "description": "this is my first practice step for building fullstack application, as for fucntionality will start slow by using on Post, Get, Delete, Put functions and will improve it as we go",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon index.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^1.7.9",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "nodemon": "^3.1.9",
+    "pg": "^8.13.1"
+  }
+}
