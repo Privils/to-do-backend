@@ -6,7 +6,34 @@ const pool = require("./components/myDb");
 const app = express();
 const port = 4000;
 
-app.use(cors());
+
+
+// if (process.env.NODE_ENV === "development") {
+//     app.use(cors()); // Allow all origins in dev
+//   } else {
+//     app.use(
+//       cors({
+//         origin: "https://yourfrontend.com", // Only allow production frontend
+//       })
+//     );
+//   }
+
+const allowedOrigins = [
+    "https://privils.github.io/To-Do-App", // GitHub Pages frontend
+    "http://127.0.0.1:5500", // Local frontend (VS Code Live Server)
+    "http://localhost:3000" // Optional: React frontend
+  ];
+  
+  app.use(cors({
+    origin: (origin, callback) => {
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not Allowed by CORS"));
+      }
+    },
+    credentials: true // ✅ Allow cookies & authentication if needed
+  }));
 app.use(express.json());
 
 // ✅ Ensure users table exists
