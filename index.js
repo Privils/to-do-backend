@@ -19,7 +19,7 @@ const port = 4000;
 //   }
 
 const allowedOrigins = [
-    "https://privils.github.io/To-Do-App/", // GitHub Pages frontend
+    "https://privils.github.io/To-Do-App", // GitHub Pages frontend
     "http://127.0.0.1:5500", // Local frontend (VS Code Live Server)
     "http://localhost:3000" // Optional: React frontend
   ];
