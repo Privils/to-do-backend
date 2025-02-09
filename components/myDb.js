@@ -1,21 +1,29 @@
-const { Pool } = require('pg');
-require('dotenv').config();
+const mysql = require("mysql2/promise");
+require("dotenv").config();
 
-const pool = new Pool({ 
-    host: process.env.host,
-    user: process.env.user,
-    password: process.env.password,
-    database: process.env.database,
-    port: process.env.port
+// Create a MariaDB connection pool
+const pool = mysql.createPool({
+  host: process.env.DB_HOST || "localhost", 
+  port: process.env.DB_PORT || 3306, // MariaDB default port
+  user: process.env.DB_USER || "root",
+  password: process.env.DB_PASSWORD || "",
+  database: process.env.DB_NAME || "to_do_app",
+  waitForConnections: true,
+  connectionLimit: 10,
+  queueLimit: 0,
 });
 
-// Test the connection (simpler approach)
-pool.query('SELECT NOW()', (err, res) => {
-    if (err) {
-        console.error('Error connecting to the database:', err);
-    } else {
-        console.log('Connected to the database:', res.rows[0]);
-    }
-});
+const testConnection = async () => {
+  try {
+    const connection = await pool.getConnection();
+    console.log("✅ Successfully connected to MariaDB");
+    connection.release();
+  } catch (error) {
+    console.error("Database connection error:", error);
+  }
+};
+ 
+testConnection(); 
 
 module.exports = pool;
+ 
